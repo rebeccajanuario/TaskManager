@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h2>Task Manager Organize suas tarefas </h2>
+    <h2>Task Manager</h2>
+    <h5>Organize suas listas de tarefas</h5>
     <form action="TaskController" method="post">
      
         <button type="submit">Entrar</button>

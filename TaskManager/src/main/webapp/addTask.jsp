@@ -9,8 +9,10 @@
 <body>
     <h2>Nova Tarefa</h2>
   <form action="TaskController" method="post">
-    <input type="text" name="titulo" placeholder="Título da tarefa" required />
-    <textarea name="descricao" placeholder="Descrição da tarefa"></textarea>
+    <input type="text" name="titulo" placeholder="TÃ­tulo da tarefa" required />
+    <br><br>
+    <textarea name="descricao" placeholder="DescriÃ§Ã£o da tarefa"></textarea>
+    <br><br>
     <input type="hidden" name="action" value="add" />
     <button type="submit">Adicionar</button>
 </form>

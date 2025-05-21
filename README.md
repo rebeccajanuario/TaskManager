@@ -18,19 +18,9 @@ Este projeto é uma aplicação web simples para gerenciamento de tarefas (CRUD)
 
 ## 📁 Estrutura do Projeto
 </br>
-📦TaskManager</br>
-┣ 📂src</br>
-┃ ┣ 📂controller → Servlets</br>
-┃ ┣ 📂dao → Acesso a dados (DAO)</br>
-┃ ┗ 📂model → Classes DTO</br>
-┣ 📂WebContent</br>
-┃ ┣ 📂css → Estilos</br>
-┃ ┣ 📂jsp → Páginas JSP (adicionar, editar, listar)</br>
-┃ ┣ 📂WEB-INF</br>
-┃ ┃ ┗ web.xml → Configuração do servlet</br>
-┗ README.md</br>
-</br>
 
+![image](https://github.com/user-attachments/assets/b7f354ed-2254-45ac-8c53-4352380ba65d)
+</br>
 ---
 
 ## ⚙️ Como Executar o Projeto

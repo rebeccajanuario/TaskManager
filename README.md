@@ -73,6 +73,41 @@ Editar tarefas
 
 Excluir tarefas
 
+## Fluxo de Comunicação da Aplicação:
+
+## Vamos traçar um exemplo: Adicionando uma Nova Tarefa
+
+    ## Usuário acessa index.html: O navegador exibe a página inicial.
+   ##  Usuário clica em "Entrar":
+        Uma requisição POST é enviada para /TaskController.
+        Como não há action na URL ou no formulário, o TaskController redireciona para listTasks.jsp.
+    ## listTasks.jsp é carregada:
+        O código Java dentro do JSP (scriptlet) cria uma instância de TaskDAO.
+        Chama dao.getAllTasks().
+        getAllTasks() (em TaskDAO) chama DBConnection.getConnection() para abrir uma conexão com o banco de dados.
+        DBConnection carrega o driver (se ainda não estiver carregado) e retorna a conexão.
+        getAllTasks() executa a query SELECT * FROM tasks, recupera os resultados em um ResultSet, mapeia cada linha para um TaskDTO e retorna uma List<TaskDTO>.
+        listTasks.jsp itera sobre essa lista e gera o HTML da tabela para exibir as tarefas.
+    ## Usuário clica em "Nova Tarefa" (em listTasks.jsp):
+        O navegador é redirecionado para addTask.jsp.
+   ##  addTask.jsp é carregada:
+        O navegador exibe o formulário vazio para adicionar uma nova tarefa.
+  ##   Usuário preenche o formulário e clica em "Adicionar":
+        Uma requisição POST é enviada para /TaskController.
+        Os parâmetros titulo, descricao e o campo oculto action=add são enviados com a requisição.
+   ##  TaskController recebe a requisição:
+        No método processRequest(), ele detecta action como "add".
+        Obtém titulo e descricao da requisição.
+        Cria um novo TaskDTO.
+        Chama dao.addTask(newTask).
+        addTask() (em TaskDAO) obtém uma conexão do DBConnection.
+        Executa a query INSERT INTO tasks (titulo, descricao) VALUES (?, ?), preenchendo os ? com os dados do TaskDTO.
+        A nova tarefa é inserida no banco de dados.
+        addTask() fecha a conexão e retorna.
+        TaskController então envia um redirecionamento (response.sendRedirect("listTasks.jsp")) para o navegador.
+  ##  Navegador redireciona para listTasks.jsp:
+        O processo do passo 3 se repete. Desta vez, dao.getAllTasks() buscará a lista atualizada de tarefas, incluindo a que acabou de ser adicionada.
+
 ✨ Contribuição
 
 YEDA ENDRIGO RABELO DE CARVALHO

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Minha Lista de Tarefas</h1>
+        <a href="/tasks/new" class="btn btn-primary">Nova Tarefa</a>
+
+        <ul class="task-list">
+            <li th:each="task : ${tasks}" class="task-item" th:classappend="${task.completed} ? 'completed' : ''">
+                <a th:href="@{/tasks/{id}(id=${task.id})}" th:text="${task.title}">Tarefa</a>
+                <span th:text="${task.completed} ? 'Concluída' : 'Pendente'"
+                      class="status"
+                      th:classappend="${task.completed} ? 'status-completed' : 'status-pending'">
+                </span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

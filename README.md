@@ -1,114 +1,75 @@
-# 📝 Lista de Tarefas - Projeto Java com JSP e Servlet
+# 📝 ToDo List - Aplicação Web com Spring Boot
 
-Este projeto é uma aplicação web simples para gerenciamento de tarefas (CRUD), utilizando **JSP**, **Servlets**, **DAO** e banco de dados relacional. A aplicação permite adicionar, listar, editar e excluir tarefas.
+Este é um projeto de uma **lista de tarefas** (ToDo List) desenvolvido com **Java + Spring Boot + Thymeleaf**, que permite aos usuários **criar, visualizar, editar e excluir tarefas**. Ideal para fins didáticos, estudos de arquitetura MVC e persistência com banco de dados usando Spring Data JPA.
 
----
+## 🚀 Funcionalidades
 
-## 📌 Tecnologias Utilizadas
+- ✅ Listar todas as tarefas
+- ➕ Criar nova tarefa
+- ✏️ Editar tarefa existente
+- 🗑️ Excluir tarefa
+- 📋 Marcar tarefas como concluídas
+- Interface simples e responsiva com HTML + CSS
 
-- Java (JDK 8+)
-- JSP (Java Server Pages)
-- Servlets
-- JSTL (Jakarta Standard Tag Library)
-- Tomcat 9.x ou 10 (compatível com Jakarta EE)
-- Banco de Dados (ex: MySQL ou H2)
-- IDE: Eclipse ou IntelliJ IDEA
+## 🛠️ Tecnologias Utilizadas
 
----
+- Java 17+
+- Spring Boot
+- Spring MVC
+- Spring Data JPA
+- Thymeleaf
+- H2 Database (ou outro banco relacional)
+- Maven
 
-## 📁 Estrutura do Projeto
-</br>
+## 📂 Estrutura de Pastas
 
-![image](https://github.com/user-attachments/assets/b7f354ed-2254-45ac-8c53-4352380ba65d)
-</br>
----
+src/ </br>
+├── main/</br>
+│ ├── java/</br>
+│ │ └── com.exemplo.todolist/</br>
+│ │ ├── controller/ # Lógica de controle das rotas</br>
+│ │ ├── model/ # Entidade Task</br>
+│ │ ├── repository/ # Interface JPA</br>
+│ │ └── service/ # Lógica de negócio</br>
+│ └── resources/</br>
+│ ├── static/css/ # Arquivos de estilo (style.css)</br>
+│ └── templates/ # Páginas Thymeleaf (.html)</br>
 
-## ⚙️ Como Executar o Projeto
 
-1. Clone o repositório:
+
+## 🔧 Como executar o projeto
+
+1. **Clone este repositório:**
 
 ```bash
-git clone https://github.com/seu-usuario/nome-do-repo.git
+git clone (https://github.com/rebeccajanuario/ListadeTarefas/)
+cd nome-do-repositorio
 
-2. Importe o projeto como Dynamic Web Project em sua IDE (Eclipse ou IntelliJ).
+./mvnw spring-boot:run
 
-3. Configure o Apache Tomcat 9 ou 10 como servidor.
+```
 
-4. Crie o banco de dados:
-CREATE DATABASE taskdb;
+🗃️ Banco de dados
 
-5. Crie a tabela:
-CREATE DATABASE IF NOT EXISTS taskdb;
-USE taskdb;
+O projeto pode usar H2 (memória) ou outro banco configurado no application.properties. O padrão é H2, facilitando testes:
 
-CREATE TABLE IF NOT EXISTS tasks (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    titulo VARCHAR(255),
-    descricao TEXT
-);
+spring.datasource.url=jdbc:h2:mem:todolist
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.h2.console.enabled=true
+
+Acesse o console em: http://localhost:8080/h2-console
 
 
-GRANT ALL PRIVILEGES ON taskdb.* TO 'root'@'localhost';
-FLUSH PRIVILEGES;
-SHOW DATABASES LIKE 'taskdb';
+✨ Layout Simples e Limpo
 
-USE taskdb;
-SHOW TABLES;
-SELECT * FROM tasks;
+As páginas HTML utilizam o mecanismo de template Thymeleaf com estilo CSS responsivo localizado em /static/css/style.css.
+🙋‍♀️ Contribuição
 
-SHOW GRANTS FOR 'root'@'localhost';
+Sinta-se à vontade para abrir issues, enviar pull requests ou sugerir melhorias!
+📄 Licença
 
-6. Configure a conexão no arquivo DBConnection.java com os dados do seu banco.
+Este projeto está licenciado sob a MIT License.
 
-7. Inicie o servidor Tomcat e acesse:
-http://localhost:8080/TaskManager/
-
-✅ Funcionalidades
-
-Criar tarefas
-
-Listar tarefas
-
-Editar tarefas
-
-Excluir tarefas
-
- Fluxo de Comunicação da Aplicação:
- Vamos traçar um exemplo: Adicionando uma Nova Tarefa
-
-     Usuário acessa index.html: O navegador exibe a página inicial.
-     Usuário clica em "Entrar":
-        Uma requisição POST é enviada para /TaskController.
-        Como não há action na URL ou no formulário, o TaskController redireciona para listTasks.jsp.
-     listTasks.jsp é carregada:
-        O código Java dentro do JSP (scriptlet) cria uma instância de TaskDAO.
-        Chama dao.getAllTasks().
-        getAllTasks() (em TaskDAO) chama DBConnection.getConnection() para abrir uma conexão com o banco de dados.
-        DBConnection carrega o driver (se ainda não estiver carregado) e retorna a conexão.
-        getAllTasks() executa a query SELECT * FROM tasks, recupera os resultados em um ResultSet, mapeia cada linha para um TaskDTO e retorna uma List<TaskDTO>.
-        listTasks.jsp itera sobre essa lista e gera o HTML da tabela para exibir as tarefas.
-     Usuário clica em "Nova Tarefa" (em listTasks.jsp):
-        O navegador é redirecionado para addTask.jsp.
-     addTask.jsp é carregada:
-        O navegador exibe o formulário vazio para adicionar uma nova tarefa.
-     Usuário preenche o formulário e clica em "Adicionar":
-        Uma requisição POST é enviada para /TaskController.
-        Os parâmetros titulo, descricao e o campo oculto action=add são enviados com a requisição.
-     TaskController recebe a requisição:
-        No método processRequest(), ele detecta action como "add".
-        Obtém titulo e descricao da requisição.
-        Cria um novo TaskDTO.
-        Chama dao.addTask(newTask).
-        addTask() (em TaskDAO) obtém uma conexão do DBConnection.
-        Executa a query INSERT INTO tasks (titulo, descricao) VALUES (?, ?), preenchendo os ? com os dados do TaskDTO.
-        A nova tarefa é inserida no banco de dados.
-        addTask() fecha a conexão e retorna.
-        TaskController então envia um redirecionamento (response.sendRedirect("listTasks.jsp")) para o navegador.
-    Navegador redireciona para listTasks.jsp:
-        O processo do passo 3 se repete. Desta vez, dao.getAllTasks() buscará a lista atualizada de tarefas, incluindo a que acabou de ser adicionada.
-
-✨ Contribuição
-
-YEDA ENDRIGO RABELO DE CARVALHO
-REBECCA JANUARIO
-Pull requests são bem-vindos! Se quiser contribuir, abra uma issue ou envie uma PR com melhorias ou correções.
+Feito com ❤️ por Rebecca e Yeda

@@ -73,3 +73,10 @@ Sinta-se à vontade para abrir issues, enviar pull requests ou sugerir melhorias
 Este projeto está licenciado sob a MIT License.
 
 Feito com ❤️ por Rebecca e Yeda
+
+
+
+https://github.com/user-attachments/assets/82309800-b6db-442d-b0b5-8a0331bb46ac
+
+
+

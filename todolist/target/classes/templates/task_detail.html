@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes da Tarefa</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="${task.title}">Título da Tarefa</h1>
+        <div class="task-detail">
+            <p th:text="${task.description}">Descrição</p>
+            <p>Status:
+                <span th:text="${task.completed} ? 'Concluída' : 'Pendente'"
+                      class="status"
+                      th:classappend="${task.completed} ? 'status-completed' : 'status-pending'">
+                </span>
+            </p>
+        </div>
+
+        <div class="detail-actions">
+            <!-- Botão de Editar -->
+            <a th:href="@{/tasks/edit/{id}(id=${task.id})}" class="btn btn-primary">Editar Tarefa</a>
+
+            <!-- Formulário para o botão de Excluir -->
+            <form th:action="@{/tasks/{id}(id=${task.id})}" method="post" style="margin:0;">
+                <button type="submit" class="btn btn-danger">Excluir</button>
+            </form>
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="/">Voltar para a lista</a>
+        </div>
+    </div>
+</body>
+</html>

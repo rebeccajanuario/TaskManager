@@ -4,7 +4,7 @@ Projeto desenvolvido para a disciplina **Desenvolvimento Web** do IFSP - Câmpus
 Esta aplicação é uma API RESTful para gerenciamento de tarefas, com autenticação e autorização baseada em **JWT (JSON Web Token)** e **Spring Security**.
 
 
-Link Youtube 
+
 ---
 ## 🎥 Demonstração em Vídeo
 

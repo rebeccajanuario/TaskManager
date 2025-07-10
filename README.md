@@ -6,6 +6,9 @@ Esta aplicação é uma API RESTful para gerenciamento de tarefas, com autentica
 
 Link Youtube 
 ---
+## 🎥 Demonstração em Vídeo
+
+[Assista à apresentação no YouTube](https://youtu.be/seu-video-id)
 
 ## 🚀 Funcionalidades
 
